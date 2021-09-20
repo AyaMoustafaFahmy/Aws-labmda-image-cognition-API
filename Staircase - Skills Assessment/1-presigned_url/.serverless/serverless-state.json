@@ -208,7 +208,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/presigned-url/dev/1632161872245-2021-09-20T18:17:52.245Z/presigned-url.zip"
+                "S3Key": "serverless/presigned-url/dev/1632173602243-2021-09-20T21:33:22.243Z/presigned-url.zip"
               },
               "Handler": "handler.presigned_url",
               "Runtime": "python3.9",
@@ -240,7 +240,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/presigned-url/dev/1632161872245-2021-09-20T18:17:52.245Z/presigned-url.zip"
+                "S3Key": "serverless/presigned-url/dev/1632173602243-2021-09-20T21:33:22.243Z/presigned-url.zip"
               },
               "Handler": "handler.presigned_url_post",
               "Runtime": "python3.9",
@@ -691,7 +691,7 @@
     "artifact": "C:\\Users\\I.Yousry\\Downloads\\Staircase - Skills Assessment\\Staircase - Skills Assessment\\1-presigned_url\\.serverless\\presigned-url.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/presigned-url/dev/1632161872245-2021-09-20T18:17:52.245Z",
+    "artifactDirectoryName": "serverless/presigned-url/dev/1632173602243-2021-09-20T21:33:22.243Z",
     "artifact": "presigned-url.zip"
   }
 }
