@@ -1,0 +1,48 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Image_recognition Api
+paths:
+  /get_image:
+    post:
+      summary: get presigned url access to s3 Bucket to show The image
+      parameters:
+        - name: image_name
+          in: body
+          description: which image_name you want to have access on  in the s3 Bucket 
+          required: Ture
+          schema:
+            type: string
+      responses:
+        '200':
+          description: presigned url to show the image
+  /upload_image:
+    post:
+      summary: get presigned url to upload image to s3 bucket
+      parameters:
+        - name: image_name
+          in: body
+          description: which image_name you want to Put   in the s3 Bucket 
+          required: Ture
+          schema:
+            type: string
+      responses:
+        '200':
+          description: presigned url to show the image
+        
+  /get_label/{image_id}:
+    get:
+      summary: get labels of the image
+      operationId: get from dynamodb data by id
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          description: The id the image_labels stored in dynamodb
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected labels Api to a valid request
+          
+
