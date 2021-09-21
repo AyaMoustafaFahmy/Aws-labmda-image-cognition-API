@@ -19,7 +19,7 @@ def presigned_url(event, context):
                                                 Params={'Bucket': os.environ["BUCKET_NAME"],
                                                         'Key': key},
                                                 ExpiresIn=3600)
-                                                
+                                              
         return {
             "status": 200,
             "data": response,

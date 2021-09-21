@@ -46,6 +46,7 @@ def image_recognition(event, context):
             print("please check the file you uploaded must be an image")
         break
 
+
 # Store the labels in Dynamodb "images" table with a unique id
 def store_label(photo_name ,labels):
     table = dynamodb.Table('Images')
