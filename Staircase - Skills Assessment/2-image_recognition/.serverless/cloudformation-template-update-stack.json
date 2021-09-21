@@ -187,7 +187,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/image-recognition/dev/1632173835991-2021-09-20T21:37:15.991Z/image-recognition.zip"
+          "S3Key": "serverless/image-recognition/dev/1632188829572-2021-09-21T01:47:09.572Z/image-recognition.zip"
         },
         "Handler": "handler.image_recognition",
         "Runtime": "python3.9",
@@ -205,14 +205,14 @@
         "ImageUnderscorerecognitionLogGroup"
       ]
     },
-    "ImageUnderscorerecognitionLambdaVersionX2IbugdazahunmXIm4kPN9p8YaGzb0VJOCBDuMausA": {
+    "ImageUnderscorerecognitionLambdaVersionMrFU62YJI5wdmvjadNdZpGgIP9EmZ3MSYdYcNwggM5M": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ImageUnderscorerecognitionLambdaFunction"
         },
-        "CodeSha256": "cjCsMSCJPgohVxDWIxWrKLK1usx+p4HUb03Jqd7qNAw="
+        "CodeSha256": "Zz0m90JMgkxslYEicOlhIoKHLxInDfceYrngzsnEn98="
       }
     },
     "ImageUnderscorerecognitionCustomS31": {
@@ -335,7 +335,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/image-recognition/dev/1632173835991-2021-09-20T21:37:15.991Z/custom-resources.zip"
+          "S3Key": "serverless/image-recognition/dev/1632188829572-2021-09-21T01:47:09.572Z/custom-resources.zip"
         },
         "FunctionName": "image-recognition-dev-custom-resource-existing-s3",
         "Handler": "s3/handler.handler",
@@ -391,7 +391,7 @@
     "ImageUnderscorerecognitionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ImageUnderscorerecognitionLambdaVersionX2IbugdazahunmXIm4kPN9p8YaGzb0VJOCBDuMausA"
+        "Ref": "ImageUnderscorerecognitionLambdaVersionMrFU62YJI5wdmvjadNdZpGgIP9EmZ3MSYdYcNwggM5M"
       },
       "Export": {
         "Name": "sls-image-recognition-dev-ImageUnderscorerecognitionLambdaFunctionQualifiedArn"

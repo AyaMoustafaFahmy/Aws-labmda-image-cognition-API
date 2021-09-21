@@ -56,6 +56,7 @@ def store_label(photo_name ,labels):
             'photo_name':photo_name,
             'labels': labels
         }
+        # 'url':http//xyz
     response = table.put_item(Item = data)
     print("data successfully added...")
     return response
