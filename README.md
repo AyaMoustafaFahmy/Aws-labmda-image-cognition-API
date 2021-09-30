@@ -25,4 +25,5 @@ also you must specify in the request body the name of the image you want to get 
 
 
 please follow this link to find swagger api documentation for image_recognition
+
 https://app.swaggerhub.com/apis-docs/ayamoustafa/image_recognition/0.1#/
