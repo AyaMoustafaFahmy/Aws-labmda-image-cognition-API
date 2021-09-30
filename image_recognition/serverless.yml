@@ -1,0 +1,108 @@
+  
+service: presigned-url
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.9
+  lambdaHashingVersion: 20201221
+  profile: serverless_admin
+  region: us-east-1
+  iamRoleStatements:
+   - Effect: "Allow"
+     Action: 
+       - "s3:GetObject"
+       - "s3:ListBucket"
+       - "s3:PutObject"
+     Resource: !Join ["/", [!GetAtt ImageBucket.Arn, "*"]]
+
+   - Effect: "Allow"
+     Action:
+     - "rekognition:DetectLabels"
+     Resource: "*"
+
+   - Effect: "Allow"
+     Action:
+     - "dynamodb:PutItem"
+     - "dynamodb:Query"
+     - "dynamodb:Scan"
+     - "dynamodb:GetItem"
+     - "dynamodb:DescribeStream"
+     - "dynamodb:GetRecords"
+     - "dynamodb:ListStreams"
+     Resource: "*"
+     
+  # resource: bucket_arn/*
+#    - include-me-dir/** 
+
+functions:
+  presigned_url:
+    handler: presigned.presigned_url
+    environment:
+      BUCKET_NAME: !Ref ImageBucket
+    events:
+      - httpApi: 
+          path: /image
+          method: get
+
+  get_label_callback:
+    handler: labels.get_label_callback
+    events:
+      - stream:
+          type: dynamodb  
+          arn: 
+           Fn::GetAtt:
+              - MyTable
+              - StreamArn
+
+  get_label:
+    handler: labels.get_label
+    events:
+      - httpApi: 
+          path: /label/{id}
+          method: get
+          
+  presigned_url_post:
+    handler: presigned.presigned_url_post
+    environment:
+      BUCKET_NAME: !Ref ImageBucket
+    events:
+      - httpApi: 
+          path: /image
+          method: post
+          
+  image_recognition:
+    handler: img_rek.image_recognition
+    events:
+      - s3:
+         bucket: !Ref ImageBucket
+         event: s3:ObjectCreated:*
+        # rules:
+        #     - suffix: .jpg
+         existing: true
+
+  
+          
+resources:
+  Resources:
+    ImageBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: image-recognition-assessment
+
+    MyTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Images
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        StreamSpecification:
+          StreamViewType: NEW_IMAGE
