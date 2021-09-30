@@ -4,7 +4,7 @@ The API stores an image, does image recognition on it and returns results to the
 project workflow:
 - deploy the services using sls deploy 
 - you can upload an image first you need a presigned url from a post request /image 
-but you must specify in the request body the name of the image as json
+but its required to specify in the request body the name of the image as json
 
 {
     "image_name":"example.jpg"
@@ -15,7 +15,7 @@ to upload an image using the below command
 curl -X PUT -T "example_image.jpg" "presigned_url"
 
 - you can get an image that is already in a s3 bucket using presigned url get request /image
-also you must specify in the request body the name of the image you want to get from s3 bucket as json
+also ots required to specify in the request body the name of the image you want to get from s3 bucket as json
 
 {
     "image_name":"example.jpg"
