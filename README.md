@@ -1,5 +1,5 @@
 This project is a simple Api for the recognition of images using AWS Rekognition on the back-end
-The API stores an image, does image recognition on it and returns results to the user in two ways, with a callback and a GET endpoint
+The API stores an image, does image recognition on it and returns results to the user in a GET endpoint
 
 project workflow:
 - deploy the services using sls deploy 
