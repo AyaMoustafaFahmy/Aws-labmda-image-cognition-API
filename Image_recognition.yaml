@@ -1,48 +1,93 @@
-openapi: "3.0.0"
+openapi: 3.0.1
 info:
-  version: 1.0.0
   title: Image_recognition Api
+  description: Image recognition Api using serverless lambda function
+  version: '0.1'
+servers:
+  - url: https://8medhj5aka.execute-api.us-east-1.amazonaws.com
 paths:
-  /get_image:
+  /image:
     post:
-      summary: get presigned url access to s3 Bucket to show The image
-      parameters:
-        - name: image_name
-          in: body
-          description: which image_name you want to have access on  in the s3 Bucket 
-          required: Ture
-          schema:
-            type: string
+      description: get a presigned url to put an image in s3 bucket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_name:
+                  type: string
+            examples:
+              '0':
+                value: "{\r\n    \"image_name\":\"DG.jpg\"\r\n}"
       responses:
         '200':
-          description: presigned url to show the image
-  /upload_image:
-    post:
-      summary: get presigned url to upload image to s3 bucket
-      parameters:
-        - name: image_name
-          in: body
-          description: which image_name you want to Put   in the s3 Bucket 
-          required: Ture
-          schema:
-            type: string
-      responses:
-        '200':
-          description: presigned url to show the image
-        
-  /get_label/{image_id}:
+          description: presigned url to upload an image with
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                  message:
+                    type: string
+                  status:
+                    type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"status": 200, "data":
+                    "https://image-recognition-assessment.s3.amazonaws.com/DG.jpg?AWSAccessKeyId=ASIAVHVHTO2QT43IJF27&Signature=xLA7vgFL8sN4gmMM9zUUJAN7jjk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEGMaCXVzLWVhc3QtMSJIMEYCIQDyGTy%2Bgi3EpsnlwtllFvrDtPxb7ssYziyuX1%2BazxTW8AIhAJv4u4BttlylNglRh%2FdsvtbMHyGwr0ECqSS0aWHsKiDzKrICCMz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMMzYwMDU1MDEwOTc3IgxJuhni6m4nOPn%2B%2BtEqhgKqDQKNmR8ujj6k9gTIzD8ZvECYL9l5cpIZFL1EVCcnivK%2FhIv2Yqj5wbmEDCy58IYa6vpxHkwqS83brYTf6HNOszkowfNDnMoR7Xc2YEPYHXTu4PPPJOMUB1WbYzHz8riK%2BbPayU9dyFHKCurbF3JM2jUhaRqkvsjUH90OAXyZqaQuYSi4kp8NmIMoET5OIeo28GmMcH396pP6xLZmDf04AvTtqPJL5wGKKoD948tKMk1NyOdn%2FBtr%2FWVkKOdqCkePMCj6CyOTTwhQ4xkPaQdFDygGDXXdhQHgHFOgwB2kgoLgh4L0Zpz8okaSRUOGk9zO%2FQ48uXEne5zevr1vRjL5DQ2HF7qLMNvD1IoGOpkB8uo7W8ocNOcz4ughNl8wKVApX3oG9sv%2FpZHKSDE14Ajv1qWhLVvXdX%2BrJth04IrHeHwVwYZLaD9s3evfTjTWI7adxqsV1wFZwFE3KoRpNYSdd2L1o8DiRIjFvYpQTtEfKP4J74KnN6wln0isQFbnWFXsn6cRZdxy6RxcLYP2XMpbn9XkevqlcrvIvk4EoC2SabN%2FKpCxYfm%2B&Expires=1632973006",
+                    "message": "This is a presigned url to upload your image"}
+      servers:
+        - url: https://8medhj5aka.execute-api.us-east-1.amazonaws.com
+    servers:
+      - url: https://8medhj5aka.execute-api.us-east-1.amazonaws.com
+  /label/134a856b-623a-4372-9f27-f498489936cf:
     get:
-      summary: get labels of the image
-      operationId: get from dynamodb data by id
-      parameters:
-        - name: petId
-          in: path
-          required: true
-          description: The id the image_labels stored in dynamodb
-          schema:
-            type: string
+      description: get all labels of an image that is generated from aws image rekognition 
       responses:
         '200':
-          description: Expected labels Api to a valid request
-          
-
+          description: all the labels of the image
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      photo_name:
+                        type: string
+                      id:
+                        type: string
+                      labels:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            confidence:
+                              type: number
+                            label:
+                              type: string
+                  message:
+                    type: string
+                  status:
+                    type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"status": 200, "data": 
+                    {"photo_name": "DG.jpg", "id":
+                    "134a856b-623a-4372-9f27-f498489936cf", "labels": [{"label":
+                    "Dog", "confidence": 96.6920928955078125}, {"label": "Pet",
+                    "confidence": 96.6920928955078125}, {"label": "Animal",
+                    "confidence": 96.6920928955078125}, {"label": "Mammal",
+                    "confidence": 96.6920928955078125}, {"label": "Cat",
+                    "confidence": 96.61037445068359375}]}, "message": "This is
+                    an image recognition labels"}
+      servers:
+        - url: https://8medhj5aka.execute-api.us-east-1.amazonaws.com
+    servers:
+      - url: https://8medhj5aka.execute-api.us-east-1.amazonaws.com
