@@ -23,3 +23,6 @@ also you must specify in the request body the name of the image you want to get 
 
 - you can get the labels of the image recognition using image unique if in /label/{id}
 
+
+please follow this link to find swagger api documentation for image_recognition
+https://app.swaggerhub.com/apis-docs/ayamoustafa/image_recognition/0.1#/
